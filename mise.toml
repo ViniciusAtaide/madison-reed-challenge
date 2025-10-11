@@ -1,0 +1,19 @@
+[tools]
+node = "24.10.0"
+pnpm = "10.18.2"
+
+[settings]
+experimental = true
+auto_install = true
+
+[tasks.pnpm-install]
+description = 'Installs dependencies with pnpm'
+run = 'pnpm install'
+sources = ['package.json', 'pnpm-lock.yaml', 'mise.toml']
+outputs = ['node_modules/.pnpm/lock.yaml']
+
+[tasks.setup]
+run = "pnpm install"
+[tasks.dev]
+run = 'pnpm dev'
+depends = ['pnpm-install']
