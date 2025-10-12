@@ -1,57 +1,22 @@
 <template>
   <div class="language-switcher">
-    <select v-model="currentLocale" @change="switchLanguage">
-      <option value="en">English</option>
-      <option value="pt-br">Português (Brasil)</option>
+    <select id="lang-switch" v-model="locale">
+      <option v-for="availableLocale in locales" :key="availableLocale.code" :value="availableLocale.code">
+        {{ availableLocale.name }}
+      </option>
     </select>
   </div>
 </template>
 
-<script setup>
-const route = useRoute()
-
-// Detect current locale from route
-const getCurrentLocale = () => {
-  const path = route.path
-  if (path.startsWith('/pt-br')) {
-    return 'pt-br'
-  }
-  return 'en' // Default to English for root path
-}
-
-// Make selector reactive to route changes
-const currentLocale = ref(getCurrentLocale())
-
-// Watch route changes to update selector
-watch(() => route.path, () => {
-  currentLocale.value = getCurrentLocale()
-})
-
-function switchLanguage(event) {
-  const newLocale = event.target.value
-  currentLocale.value = newLocale
-  
-  // Use client-side navigation instead of page reload
-  if (newLocale === 'en') {
-    navigateTo('/')  // Default locale has no prefix
-  } else {
-    navigateTo(`/${newLocale}`)  // Other locales have prefix
-  }
-}
+<script setup lang="ts">
+const { locale, locales } = useI18n()
 </script>
 
 <style scoped>
-.language-switcher {
-  position: fixed;
-  top: 2rem;
-  right: 2rem;
-  z-index: 1000;
-}
-
 .language-switcher select {
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 2.5rem 0.5rem 1rem; /* Add more padding-right for dropdown arrow */
   border: 2px solid var(--mr-color-brand-primary);
-  border-radius: 0.5rem;
+  border-radius: 0.375rem;
   background: var(--mr-color-bg-primary);
   color: var(--mr-color-brand-primary);
   font-weight: 600;
@@ -59,6 +24,13 @@ function switchLanguage(event) {
   font-family: var(--font-secondary);
   box-shadow: var(--mr-shadow-sm);
   transition: all 0.2s ease;
+  font-size: 0.875rem; /* Match theme toggle font size */
+  appearance: none; /* Remove default styling */
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23d63384' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  min-height: 2.5rem; /* Ensure consistent height */
 }
 
 .language-switcher select:hover {
@@ -74,14 +46,9 @@ function switchLanguage(event) {
 }
 
 @media (max-width: 768px) {
-  .language-switcher {
-    top: 1rem;
-    right: 1rem;
-  }
-  
   .language-switcher select {
     padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 </style>
