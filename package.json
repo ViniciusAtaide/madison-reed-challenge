@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "concurrently \"nuxt dev\" \"pnpm i18n:extract\"",
+    "dev:nuxt-only": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "i18n:watch": "node scripts/i18n-watcher.js",
+    "i18n:extract": "node scripts/i18n-watcher.js --extract-only"
   },
   "dependencies": {
     "@nuxt/eslint": "1.9.0",
@@ -20,5 +23,8 @@
     "nuxt": "^4.1.3",
     "vue": "^3.5.22",
     "vue-router": "^4.5.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

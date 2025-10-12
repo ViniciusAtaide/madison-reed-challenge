@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "Welcome to Madison Reed",
+    "subtitle": "Image Gallery Challenge",
+    "description": "Professional hair color and care products for beautiful, healthy hair.",
+    "cta": "Shop Now"
+  },
+  "features": {
+    "title": "Why Choose Madison Reed?",
+    "quality": {
+      "title": "Premium Quality",
+      "description": "Professional-grade hair color formulated with care."
+    },
+    "application": {
+      "title": "Easy Application",
+      "description": "Simple, at-home color application process."
+    },
+    "support": {
+      "title": "Expert Support",
+      "description": "Access to professional colorists for guidance."
+    },
+    "responsive": {
+      "title": "Responsive Design",
+      "description": "Optimized for all devices and screen sizes."
+    },
+    "accessibility": {
+      "title": "WCAG Compliant",
+      "description": "Built with accessibility standards in mind."
+    },
+    "multilingual": {
+      "title": "Multilingual Support",
+      "description": "Available in multiple languages for global reach."
+    }
+  }
+}

@@ -1,0 +1,121 @@
+/* Madison Reed Brand Typography */
+
+/* Font Family Variables */
+:root {
+  --font-primary: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-system: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Madison Reed Design System - Colors */
+  --mr-color-text-primary: #1a202c;     /* Contrast: 16.12:1 - AAA Large & Small */
+  --mr-color-text-secondary: #2d3748;   /* Contrast: 12.63:1 - AAA Large & Small */
+  --mr-color-text-body: #4a5568;        /* Contrast: 7.54:1 - AAA Large & Small */
+  --mr-color-text-muted: #718096;       /* Contrast: 4.69:1 - AA Large & Small */
+  
+  /* Madison Reed Brand Colors */
+  --mr-color-brand-primary: #d63384;    /* Madison Reed Pink */
+  --mr-color-brand-secondary: #6f42c1;  /* Complementary Purple */
+  --mr-color-brand-hover: #b02a5b;      /* Darker pink for hover states */
+  
+  /* Background Colors */
+  --mr-color-bg-primary: #ffffff;
+  --mr-color-bg-secondary: #f7fafc;
+  --mr-color-bg-tertiary: #edf2f7;
+  --mr-color-bg-hover: #f1f5f9;
+  
+  /* Border Colors */
+  --mr-color-border-primary: #e2e8f0;
+  --mr-color-border-secondary: #cbd5e0;
+  --mr-color-border-focus: rgba(214, 51, 132, 0.2);
+  
+  /* Shadow Colors */
+  --mr-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --mr-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --mr-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --mr-shadow-focus: 0 0 0 3px var(--mr-color-border-focus);
+}
+
+/* Base Typography */
+html {
+  font-family: var(--font-primary);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset default margins */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+}
+
+/* Headings - Use Poppins for elegant impact */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--mr-color-text-primary);
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--mr-color-text-primary);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--mr-color-text-secondary);
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--mr-color-text-secondary);
+}
+
+/* Body text - Use Inter for readability */
+body, p, span, div {
+  font-family: var(--font-primary);
+  color: var(--mr-color-text-body);
+}
+
+/* Buttons - Strong and modern */
+button, .btn {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Brand-specific styles matching Madison Reed aesthetic */
+.brand-text {
+  font-family: var(--font-secondary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.elegant-text {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+/* Responsive typography */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+}

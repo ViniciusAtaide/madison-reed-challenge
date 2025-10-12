@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "title": "Bem-vindo ao Madison Reed",
+    "subtitle": "Desafio da Galeria de Imagens",
+    "description": "Produtos profissionais de coloração e cuidado capilar para cabelos lindos e saudáveis.",
+    "cta": "Comprar Agora"
+  },
+  "features": {
+    "title": "Por que escolher Madison Reed?",
+    "quality": {
+      "title": "Qualidade Premium",
+      "description": "Coloração capilar de nível profissional formulada com cuidado."
+    },
+    "application": {
+      "title": "Aplicação Fácil",
+      "description": "Processo simples de coloração em casa."
+    },
+    "support": {
+      "title": "Suporte Especializado",
+      "description": "Acesso a coloristas profissionais para orientação."
+    },
+    "responsive": {
+      "title": "Design Responsivo",
+      "description": "Otimizado para todos os dispositivos e tamanhos de tela."
+    },
+    "accessibility": {
+      "title": "Conforme WCAG",
+      "description": "Construído seguindo padrões de acessibilidade."
+    },
+    "multilingual": {
+      "title": "Suporte Multilíngue",
+      "description": "Disponível em múltiplos idiomas para alcance global."
+    }
+  }
+}

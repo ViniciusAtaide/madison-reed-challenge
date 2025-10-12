@@ -1,22 +1,38 @@
 <template>
   <div class="home-page">
-    hero
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">{{ $t('hero.title') }}</h1>
+        <p class="hero-subtitle">{{ $t('hero.subtitle') }}</p>
+        <p class="hero-description">{{ $t('hero.description') }}</p>
+        <button class="cta-button">{{ $t('hero.cta') }}</button>
+        <LanguageSwitcher />
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="features-container">
+        <h2>{{ $t('features.title') }}</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>{{ $t('features.responsive.title') }}</h3>
+            <p>{{ $t('features.responsive.description') }}</p>
+          </div>
+          <div class="feature-card">
+            <h3>{{ $t('features.accessibility.title') }}</h3>
+            <p>{{ $t('features.accessibility.description') }}</p>
+          </div>
+          <div class="feature-card">
+            <h3>{{ $t('features.multilingual.title') }}</h3>
+            <p>{{ $t('features.multilingual.description') }}</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
-// Component name for ESLint
-defineOptions({
-  name: 'HomePage'
-})
-
-// Set page meta
-useHead({
-  title: 'Madison Reed - Premium Hair Color',
-  meta: [
-    { name: 'description', content: 'Professional hair color and care products for beautiful, healthy hair.' }
-  ]
-})
 </script>
 
 <style scoped>
@@ -41,6 +57,13 @@ useHead({
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  opacity: 0.95;
 }
 
 .hero-description {
@@ -116,6 +139,10 @@ useHead({
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
   }
   
   .hero-description {
