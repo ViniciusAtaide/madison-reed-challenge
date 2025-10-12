@@ -16,7 +16,9 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/image',
     '@nuxt/test-utils',
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@pinia/nuxt',
+    '@nuxtjs/color-mode'
   ],
 
   fonts: {
@@ -25,6 +27,13 @@ export default defineNuxtConfig({
       { name: 'Poppins', provider: 'google' },
       { name: 'system-ui', provider: 'none' }
     ]
+  },
+  
+  colorMode: {
+    preference: 'light', // default value
+    fallback: 'light', // fallback value if not system preference found
+    classSuffix: '', // no suffix, so we get 'light' and 'dark' classes
+    storageKey: 'mr-theme' // use same key as our custom implementation
   },
   
   i18n: {
