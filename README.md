@@ -1,7 +1,4 @@
-# Nuxt Minimal Starter
-
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
-
+# Madison Reed Image Gallery
 
 ## Setup
 Install mise for automatic language agnostic global dependencies installation
@@ -10,20 +7,18 @@ Install mise for automatic language agnostic global dependencies installation
 curl https://mise.run | sh
 ```
 
-Make sure to install dependencies:
+Automatic first setup
 
 ```bash
-# npm
-npm install
+mise dev
+```
 
+```bash
 # pnpm
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
+#dev
+pnpm dev
 ```
 
 ## Development Server
@@ -31,17 +26,6 @@ bun install
 Start the development server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
@@ -49,33 +33,13 @@ bun run dev
 Build the application for production:
 
 ```bash
-# npm
-npm run build
-
 # pnpm
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
 Locally preview production build:
 
 ```bash
-# npm
-npm run preview
-
 # pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
