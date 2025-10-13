@@ -27,12 +27,12 @@
 
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Madison Reed - Beautiful Image Gallery',
-  description: 'Discover a stunning collection of high-quality images in our responsive gallery. Browse through 100 beautiful photos with smooth loading and modern design.',
-  
+  title: 'Madison Reed - Challenge',
+  description: 'Code challenge',
+
   // Open Graph / Facebook / WhatsApp
-  ogTitle: 'Madison Reed - Beautiful Image Gallery',
-  ogDescription: 'Discover a stunning collection of high-quality images in our responsive gallery. Browse through 100 beautiful photos with smooth loading and modern design.',
+  ogTitle: 'Madison Reed - Challenge',
+  ogDescription: 'Code challenge',
   ogType: 'website',
   ogUrl: 'https://viniciusataide.github.io/',
   ogImage: 'https://viniciusataide.github.io/whatsapp.svg',
@@ -44,15 +44,9 @@ useSeoMeta({
   
   // Twitter
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Madison Reed - Beautiful Image Gallery',
-  twitterDescription: 'Discover a stunning collection of high-quality images in our responsive gallery.',
-  twitterImage: 'https://viniciusataide.github.io/og-image.svg',
-  twitterImageAlt: 'Madison Reed Image Gallery - Beautiful collection of photos',
-  
-  // WhatsApp uses Open Graph properties
-  // articleAuthor: ['Madison Reed'], // Commented out due to type issues
-  
-  // General SEO
+  twitterTitle: 'Madison Reed - Challenge',
+  twitterDescription: 'Code challenge',
+
   keywords: 'image gallery, photos, responsive design, modern UI, Madison Reed, photography, visual portfolio'
 })
 
