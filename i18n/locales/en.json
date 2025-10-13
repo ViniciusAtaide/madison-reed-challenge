@@ -1,14 +1,20 @@
 {
   "By": "By",
-  "Dark": "Dark",
-  "Failed to load images. Please try again.": "Failed to load images. Please try again.",
+  "Close this modal": "Close this modal",
+  "Download": "Download",
+  "Expand": "Expand",
+  "Gallery Error": "Gallery Error",
   "Image Gallery": "Image Gallery",
-  "Image Gallery Challenge": "Image Gallery Challenge",
-  "Light": "Light",
+  "Image dimensions": "Image dimensions",
   "Loading images...": "Loading images...",
   "Madison Reed": "Madison Reed",
-  "Retry": "Retry",
+  "Refresh page": "Refresh page",
+  "Something went wrong": "Something went wrong",
   "Switch to dark theme": "Switch to dark theme",
   "Switch to light theme": "Switch to light theme",
-  "Toggle between light and dark theme": "Toggle between light and dark theme"
+  "Technical details": "Technical details",
+  "Toggle between light and dark theme": "Toggle between light and dark theme",
+  "We encountered an error while loading the content.": "We encountered an error while loading the content.",
+  "We encountered an error while loading the gallery.": "We encountered an error while loading the gallery.",
+  "a": "a"
 }

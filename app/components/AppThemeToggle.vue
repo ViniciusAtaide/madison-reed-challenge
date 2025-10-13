@@ -1,28 +1,32 @@
 <template>
-  <button
-    class="theme-toggle"
-    :aria-label="$t('Toggle between light and dark theme')"
-    :title="
-      $colorMode.value === 'light'
-        ? $t('Switch to dark theme')
-        : $t('Switch to light theme')
-    "
-    @click="toggleTheme"
-  >
-    <span class="theme-icon">
-      {{ $colorMode.value === "light" ? "🌙" : "☀️" }}
-    </span>
-    <span class="theme-text">
-      {{ $colorMode.value === "light" ? $t("Dark") : $t("Light") }}
-    </span>
-  </button>
+  <client-only>
+    <button
+      class="theme-toggle"
+      :aria-label="$t('Toggle between light and dark theme')"
+      :title="
+        colorMode.value === 'light'
+          ? $t('Switch to dark theme')
+          : $t('Switch to light theme')
+      "
+      @click="toggleTheme"
+    >
+      <span class="theme-icon">
+        {{ colorMode.value === "light" ? "🌙" : "☀️" }}
+      </span>
+    </button>
+    <template #fallback>
+      <div class="theme-toggle theme-toggle-fallback">
+        <span class="theme-icon">🌙</span>
+      </div>
+    </template>
+  </client-only>
 </template>
 
 <script setup lang="ts">
 const colorMode = useColorMode()
 
 const toggleTheme = () => {
-  colorMode.preference = colorMode.value === 'light' ? 'dark' : 'light'
+  colorMode.preference = colorMode.value === "light" ? "dark" : "light"
 }
 </script>
 
@@ -31,8 +35,8 @@ const toggleTheme = () => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--mr-color-bg-secondary);
-  border: 2px solid var(--mr-color-border-primary);
+  background: transparent;
+  border: 0;
   color: var(--mr-color-text-primary);
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
@@ -45,9 +49,6 @@ const toggleTheme = () => {
 }
 
 .theme-toggle:hover {
-  background: var(--mr-color-bg-hover);
-  border-color: var(--mr-color-brand-primary);
-  transform: translateY(-1px);
   box-shadow: var(--mr-shadow-md);
 }
 
@@ -63,6 +64,11 @@ const toggleTheme = () => {
 
 .theme-toggle:hover .theme-icon {
   transform: scale(1.1);
+}
+
+.theme-toggle-fallback {
+  pointer-events: none;
+  opacity: 0.7;
 }
 
 .theme-text {

@@ -1,32 +1,29 @@
 :root {
-  /* Typography */
   --font-primary: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --font-secondary: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   
-  /* Light Theme Colors - WCAG AAA Compliant */
-  --mr-color-text-primary: #1a1a1a;        /* Contrast 15.29:1 */
-  --mr-color-text-secondary: #2d3748;      /* Contrast 11.58:1 */
-  --mr-color-text-body: #4a5568;           /* Contrast 7.54:1 */
-  --mr-color-text-muted: #718096;          /* Contrast 4.69:1 */
-  --mr-color-text-inverse: #ffffff;        /* For dark backgrounds */
+  --mr-color-text-primary: #1a1a1a;
+  --mr-color-text-secondary: #2d3748;
+  --mr-color-text-body: #4a5568;
+  --mr-color-text-muted: #718096;
+  --mr-color-text-inverse: #ffffff;
   
-  /* Brand Colors - Consistent across themes */
-  --mr-color-brand-primary: #d63384;
-  --mr-color-brand-hover: #b02a5b;
-  --mr-color-brand-light: #f8d7da;
-  --mr-color-brand-dark: #8b1538;
+  --mr-color-brand-primary: #4a90a4;
+  --mr-color-brand-hover: #3a7086;
+  --mr-color-brand-light: #e6f2f5;
+  --mr-color-brand-dark: #2a5866;
   
   /* Background Colors - Light Theme */
-  --mr-color-bg-primary: #ffffff;
-  --mr-color-bg-secondary: #f8f9fa;
-  --mr-color-bg-tertiary: #e9ecef;
-  --mr-color-bg-hover: #f1f5f9;
-  --mr-color-bg-elevated: #ffffff;
+  --mr-color-bg-primary: #fafbfc;
+  --mr-color-bg-secondary: #f4f6f8;
+  --mr-color-bg-tertiary: #e8ecf0;
+  --mr-color-bg-hover: #f0f4f7;
+  --mr-color-bg-elevated: #fafbfc;
   
   /* Border Colors */
   --mr-color-border-primary: #dee2e6;
   --mr-color-border-secondary: #ced4da;
-  --mr-color-border-focus: rgba(214, 51, 132, 0.3);
+  --mr-color-border-focus: rgba(74, 144, 164, 0.3);
   
   /* Status Colors - WCAG Compliant */
   --mr-color-success: #198754;             /* Green with good contrast */
@@ -55,20 +52,19 @@
   --mr-color-text-inverse: #1a1a1a;        /* For light backgrounds */
   
   /* Background Colors - Dark Theme */
-  --mr-color-bg-primary: #121212;          /* Primary dark background */
-  --mr-color-bg-secondary: #1e1e1e;        /* Secondary surfaces */
-  --mr-color-bg-tertiary: #2d2d2d;         /* Tertiary surfaces */
-  --mr-color-bg-hover: #3a3a3a;            /* Hover states */
-  --mr-color-bg-elevated: #242424;         /* Cards, modals */
+  --mr-color-bg-primary: #0f1419;
+  --mr-color-bg-secondary: #1a1f24;
+  --mr-color-bg-tertiary: #252a2f;
+  --mr-color-bg-hover: #323a42;
+  --mr-color-bg-elevated: #1f252a;
   
   /* Border Colors - Dark Theme */
   --mr-color-border-primary: #404040;
   --mr-color-border-secondary: #525252;
-  --mr-color-border-focus: rgba(214, 51, 132, 0.4);
+  --mr-color-border-focus: rgba(74, 144, 164, 0.4);
   
-  /* Brand Colors - Adjusted for Dark Theme */
-  --mr-color-brand-light: #3d1a27;         /* Darker version for dark theme */
-  --mr-color-brand-dark: #ff6bb5;          /* Lighter version for dark theme */
+  --mr-color-brand-light: #1e3c4a;
+  --mr-color-brand-dark: #6bb8d6;
   
   /* Shadows - More pronounced for dark theme */
   --mr-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);

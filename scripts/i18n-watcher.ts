@@ -5,16 +5,18 @@ import fs from 'fs'
 import path from 'path'
 
 const localesDir: string = './i18n/locales'
-const watchDirs: string[] = ['./app']
+const watchDirs: string[] = [
+  './app/**/*.{vue,js,ts}'
+]
 
 const i18nPatterns: RegExp[] = [
-  /\$t\(['"`]([^'"`]+)['"`]\)/g,                    // $t('key')
-  /\{\{\s*\$t\(['"`]([^'"`]+)['"`]\)\s*\}\}/g,     // {{ $t('key') }}
-  /t\(['"`]([^'"`]+)['"`]\)/g,                      // t('key') - composition API
-  /useI18n\(\)\.t\(['"`]([^'"`]+)['"`]\)/g,        // useI18n().t('key')
-  /i18n\.global\.t\(['"`]([^'"`]+)['"`]\)/g,       // i18n.global.t('key')
-  /\$t\(\s*['"`]([^'"`]+)['"`]\s*\)/gs,            // $t( 'key' ) with whitespace/newlines
-  /\{\{\s*\$t\(\s*['"`]([^'"`]+)['"`]\s*\)\s*\}\}/gs // {{ $t( 'key' ) }} with whitespace/newlines
+  /\$t\(['"`]([^'"`]+)['"`]\)/g,
+  /\{\{\s*\$t\(['"`]([^'"`]+)['"`]\)\s*\}\}/g,
+  /t\(['"`]([^'"`]+)['"`]\)/g,
+  /useI18n\(\)\.t\(['"`]([^'"`]+)['"`]\)/g,
+  /i18n\.global\.t\(['"`]([^'"`]+)['"`]\)/g,
+  /\$t\(\s*['"`]([^'"`]+)['"`]\s*\)/gs,
+  /\{\{\s*\$t\(\s*['"`]([^'"`]+)['"`]\s*\)\s*\}\}/gs
 ]
 
 function extractI18nKeys(content: string): string[] {
@@ -32,7 +34,6 @@ function extractI18nKeys(content: string): string[] {
 }
 
 function updateTranslationFiles(): void {
-  // Get existing locale files
   const localeFiles: string[] = fs.readdirSync(localesDir)
     .filter(file => file.endsWith('.json'))
   
@@ -41,49 +42,43 @@ function updateTranslationFiles(): void {
     return
   }
   
-  // Scan for all i18n keys in use
   const usedKeys = new Set<string>()
-  scanDirectory('./app', usedKeys)
+  
+  if (fs.existsSync('./app')) {
+    scanDirectory('./app', usedKeys)
+  }
   
   console.log(`Found ${usedKeys.size} translation keys in use`)
   
-  // Update each locale file
   localeFiles.forEach(file => {
     const filePath: string = path.join(localesDir, file)
     let translations: Record<string, string> = {}
     
-    // Load existing translations
     try {
       const content: string = fs.readFileSync(filePath, 'utf8')
       translations = JSON.parse(content)
-    } catch (error: any) {
-      console.warn(`Warning: Could not parse ${filePath}:`, error.message)
+    } catch (error) {
+      console.warn(`Warning: Could not parse ${filePath}:`, (error as Error).message)
       translations = {}
     }
     
-    // Create new translations object with only used keys
     const newTranslations: Record<string, string> = {}
     
     usedKeys.forEach(key => {
       if (translations[key]) {
-        // Keep existing translation
         newTranslations[key] = translations[key]
       } else if (file === 'en.json') {
-        // For English file, use the key as the value
         newTranslations[key] = key
       } else {
-        // For other languages, use placeholder that shows the English text
-        newTranslations[key] = key // Use English text as placeholder for translation
+        newTranslations[key] = key
       }
     })
     
-    // Sort keys alphabetically for better readability
     const sortedTranslations: Record<string, string> = {}
     Object.keys(newTranslations).sort().forEach(key => {
       sortedTranslations[key] = newTranslations[key]
     })
     
-    // Write back to file
     fs.writeFileSync(filePath, JSON.stringify(sortedTranslations, null, 2))
     console.log(`✅ Updated ${file} with ${Object.keys(sortedTranslations).length} keys`)
   })
@@ -103,28 +98,25 @@ function scanDirectory(dir: string, keys: Set<string>): void {
           const content: string = fs.readFileSync(fullPath, 'utf8')
           const fileKeys: string[] = extractI18nKeys(content)
           fileKeys.forEach(key => keys.add(key))
-        } catch (error: any) {
-          console.warn(`Warning: Could not read ${fullPath}:`, error.message)
+        } catch (error) {
+          console.warn(`Warning: Could not read ${fullPath}:`, (error as Error).message)
         }
       }
     })
-  } catch (error: any) {
-    console.warn(`Warning: Could not scan directory ${dir}:`, error.message)
+  } catch (error) {
+    console.warn(`Warning: Could not scan directory ${dir}:`, (error as Error).message)
   }
 }
 
-// Check for extract-only mode
 if (process.argv.includes('--extract-only')) {
   console.log('🔍 Extracting i18n keys...')
   updateTranslationFiles()
   process.exit(0)
 }
 
-// Initial scan
 console.log('🔍 Initial scan for i18n keys...')
 updateTranslationFiles()
 
-// Watch for changes
 console.log('👀 Watching for file changes...')
 const watcher = chokidar.watch(watchDirs, {
   ignored: /(^|[/\\])\../,
@@ -132,7 +124,7 @@ const watcher = chokidar.watch(watchDirs, {
   ignoreInitial: true
 })
 
-let updateTimeout: NodeJS.Timeout
+let updateTimeout: ReturnType<typeof setTimeout>
 
 function scheduleUpdate(): void {
   clearTimeout(updateTimeout)

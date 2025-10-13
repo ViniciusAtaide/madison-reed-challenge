@@ -17,7 +17,7 @@ mise dev
 # pnpm
 pnpm install
 
-#dev
+# dev
 pnpm dev
 ```
 

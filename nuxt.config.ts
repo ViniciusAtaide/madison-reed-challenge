@@ -1,14 +1,22 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'stylesheet', href: '/fonts.css' }
       ]
     }
   },
+
+  nitro: {
+    compressPublicAssets: true,
+    minify: true
+  },
+  
+  css: [
+    '~/assets/css/theme.css'
+  ],
+  
   devtools: { enabled: true },
 
   modules: [
@@ -18,8 +26,20 @@ export default defineNuxtConfig({
     '@nuxt/test-utils',
     '@nuxtjs/i18n',
     '@pinia/nuxt',
-    '@nuxtjs/color-mode'
+    '@nuxtjs/color-mode',
+    'nuxt-svgo'
   ],
+  
+  svgo: {
+    svgoConfig: {
+      plugins: [
+        'preset-default',
+        {
+          name: 'removeDimensions',
+        }
+      ]
+   }
+  },
 
   fonts: {
     families: [
@@ -30,10 +50,10 @@ export default defineNuxtConfig({
   },
   
   colorMode: {
-    preference: 'light', // default value
-    fallback: 'light', // fallback value if not system preference found
-    classSuffix: '', // no suffix, so we get 'light' and 'dark' classes
-    storageKey: 'mr-theme' // use same key as our custom implementation
+    preference: 'light',
+    fallback: 'light', 
+    classSuffix: '', 
+    storageKey: 'mr-theme' 
   },
   
   i18n: {
@@ -48,12 +68,19 @@ export default defineNuxtConfig({
       { 
         code: 'pt-br', 
         name: 'Português (Brasil)',
-        language: 'pt-BR', 
+        language: 'pt-BR',
         file: 'pt-br.json'
       }
     ],
     langDir: 'locales',
     defaultLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+      alwaysRedirect: false,
+      fallbackLocale: 'en'
+    },
     vueI18n: './i18n.config.ts'
   }
 })
