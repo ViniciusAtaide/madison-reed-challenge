@@ -16,12 +16,7 @@
           class="modal-content"
           @click.stop
         >
-          <div
-            class="image-container"
-            :style="{
-              aspectRatio: `${modalStore.selectedImage?.width} / ${modalStore.selectedImage?.height}`,
-            }"
-          >
+          <div class="image-container">
             <button
               ref="closeBtnRef"
               class="close-button"
@@ -98,6 +93,7 @@ const imageModalStyle = computed(() => {
   return {
     "--image-x": `${rect.x / 16}rem`,
     "--image-y": `${rect.y / 16}rem`,
+    "aspect-ratio": `${rect.width} / ${rect.height}`,
   };
 });
 
@@ -274,7 +270,6 @@ const handleDownload = () => {
 .download-button:focus {
   box-shadow: var(--mr-shadow-focus);
 }
-
 
 .modal-enter-from .modal-content {
   transform: translateX(calc(var(--image-x, 50vw) - 50vw))
