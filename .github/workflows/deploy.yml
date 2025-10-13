@@ -24,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: "24"
           
       - name: Enable Corepack
         run: corepack enable
@@ -36,7 +36,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Build with Nuxt
-        run: pnpm run generate
+        run: pnpm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
