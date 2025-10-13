@@ -8,9 +8,14 @@ export default defineNuxtConfig({
     }
   },
 
+  ssr: false,
+  
   nitro: {
     compressPublicAssets: true,
-    minify: true
+    minify: true,
+    prerender: {
+      routes: ['/']
+    }
   },
   
   css: [
