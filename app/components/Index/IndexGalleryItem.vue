@@ -215,13 +215,13 @@ const handleExpandClick = (image: ImageSchema) => {
   margin: 0;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .gallery-item {
     margin-bottom: 1.25rem;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .gallery-item {
     margin-bottom: 1rem;
   }

@@ -1,7 +1,5 @@
 <template>
   <div class="gallery-container">
-    <h1>{{ $t("Image Gallery") }}</h1>
-
     <div class="gallery-grid">
       <IndexGalleryItem
         v-for="image in data"
@@ -42,14 +40,6 @@ const { data } = await useLazyFetch("https://picsum.photos/v2/list?limit=100", {
   margin: 0 auto;
 }
 
-.gallery-container h1 {
-  text-align: center;
-  margin-top: 0;
-  margin-bottom: 2rem;
-  color: var(--mr-color-text-primary);
-  font-family: var(--font-secondary);
-}
-
 .gallery-grid {
   column-count: 4;
   column-gap: 1.5rem;
@@ -57,7 +47,7 @@ const { data } = await useLazyFetch("https://picsum.photos/v2/list?limit=100", {
   padding: 1rem 0;
 }
 
-@media (max-width: 991px) {
+@media (max-width: 992px) {
   .gallery-grid {
     column-count: 2;
     column-gap: 1.25rem;
@@ -68,7 +58,7 @@ const { data } = await useLazyFetch("https://picsum.photos/v2/list?limit=100", {
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .gallery-grid {
     column-count: 1;
     column-gap: 1rem;

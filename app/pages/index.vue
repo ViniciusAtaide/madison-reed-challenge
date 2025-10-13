@@ -3,6 +3,8 @@
     <AppHeader />
 
     <section class="gallery-section">
+      <h1 class="page-title">{{ $t("Image Gallery") }}</h1>
+      
       <NuxtErrorBoundary>
         <Suspense>
           <IndexGallery />
@@ -44,8 +46,15 @@ useHead({
 })
 </script>
 
-
 <style scoped>
+.page-title {
+  text-align: center;
+  margin: 0 0 2rem 0;
+  padding-top: 2rem;
+  color: var(--mr-color-text-primary);
+  font-family: var(--font-secondary);
+}
+
 .gallery-section {
   padding: 0 2rem 3rem 2rem;
   background-color: var(--mr-color-bg-secondary);

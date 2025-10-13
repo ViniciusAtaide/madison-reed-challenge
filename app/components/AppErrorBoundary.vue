@@ -5,16 +5,16 @@
         <ErrorIcon width="48" height="48" />
       </div>
 
-      <h2>{{ title ?? $t("Something went wrong") }}</h2>
-      <p>
+      <h2 class="error-title">{{ title ?? $t("Something went wrong") }}</h2>
+      <p class="error-message">
         {{
           message ?? $t("We encountered an error while loading the content.")
         }}
       </p>
 
       <details v-if="showDetails && error" class="error-details">
-        <summary>{{ $t("Technical details") }}</summary>
-        <pre>{{ error }}</pre>
+        <summary class="error-summary">{{ $t("Technical details") }}</summary>
+        <pre class="error-code">{{ error }}</pre>
       </details>
 
       <div class="error-actions">
@@ -86,14 +86,14 @@ function handleRefresh() {
   margin-bottom: 1.5rem;
 }
 
-.error-content h2 {
+.error-title {
   color: var(--mr-color-text-primary);
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
   font-weight: 600;
 }
 
-.error-content p {
+.error-message {
   color: var(--mr-color-text-body);
   margin: 0 0 2rem 0;
   line-height: 1.6;
@@ -108,14 +108,14 @@ function handleRefresh() {
   border: 1px solid var(--mr-color-border-primary);
 }
 
-.error-details summary {
+.error-summary {
   cursor: pointer;
   font-weight: 500;
   color: var(--mr-color-text-primary);
   margin-bottom: 0.5rem;
 }
 
-.error-details pre {
+.error-code {
   background: var(--mr-color-bg-elevated);
   padding: 1rem;
   border-radius: 0.25rem;

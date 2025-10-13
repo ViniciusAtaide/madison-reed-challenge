@@ -286,10 +286,9 @@ const handleDownload = () => {
     translateY(calc(var(--image-y, 50vh) - 50vh)) scale(0.2);
 }
 
-@media (max-width: 48rem) {
+@media (max-width: 768px) {
   .modal-content {
     width: 100vw;
-    height: 90vh;
     max-width: 95vw;
     max-height: 90vh;
     margin: 1rem;
@@ -309,6 +308,10 @@ const handleDownload = () => {
     align-items: center;
   }
 
+  .image-container {
+    position: initial;
+  }
+
   .author-name {
     font-size: 1rem;
   }
@@ -320,7 +323,7 @@ const handleDownload = () => {
   }
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 640px) {
   .image-info {
     gap: 1rem;
     flex-direction: column;
@@ -328,7 +331,7 @@ const handleDownload = () => {
   }
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 480px) {
   .modal-overlay {
     padding: 0.5rem;
   }
@@ -351,7 +354,7 @@ const handleDownload = () => {
   }
 }
 
-@media (max-width: 48rem) and (orientation: landscape) {
+@media (max-width: 768px) and (orientation: landscape) {
   .modal-content {
     height: 95vh;
     width: 90vw;
