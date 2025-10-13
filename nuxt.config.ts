@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   app: {
-    baseURL: '/madison-reed-challenge/',
+    baseURL: '/',
     head: {
       htmlAttrs: { lang: 'en' },
       link: [
