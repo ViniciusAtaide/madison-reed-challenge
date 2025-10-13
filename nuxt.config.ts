@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   app: {
-    baseURL: '/',
+    baseURL: '/madison-reed-challenge/',
     head: {
       htmlAttrs: { lang: "en" },
       link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
