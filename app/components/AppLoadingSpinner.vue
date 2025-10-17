@@ -1,9 +1,8 @@
 <template>
-      <div class="loading-content">
-        <div class="spinner" />
-        <p>{{ $t("Loading images...") }}</p>
-      </div>
-
+  <div class="loading-content">
+    <div class="spinner" />
+    <p>{{ $t("Loading images...") }}</p>
+  </div>
 </template>
 
 <style scoped>

@@ -32,6 +32,8 @@
     "@typescript-eslint/eslint-plugin": "^8.46.0",
     "@typescript-eslint/parser": "^8.46.0",
     "concurrently": "^9.2.1",
-    "nuxt-svgo": "^4.2.6"
+    "eslint-plugin-vue": "^10.5.1",
+    "nuxt-svgo": "^4.2.6",
+    "vue-eslint-parser": "^10.2.0"
   }
 }

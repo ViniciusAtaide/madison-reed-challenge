@@ -2,7 +2,7 @@
   <Teleport to="body">
     <Transition name="modal">
       <div
-        v-if="modalStore.isOpen"
+        v-if="modalStore.isOpened"
         class="modal-overlay"
         role="dialog"
         aria-modal="true"
@@ -16,7 +16,7 @@
           class="modal-content"
           @click.stop
         >
-          <div class="image-container">
+          <div v-if="modalStore.selectedImage" class="image-container">
             <button
               ref="closeBtnRef"
               class="close-button"
@@ -28,6 +28,7 @@
 
             <img
               :id="modalTitleId"
+              :style="imageStyle"
               class="modal-image"
               :src="modalStore.selectedImage?.download_url"
               :alt="
@@ -37,7 +38,7 @@
               "
             />
 
-            <div v-if="modalStore.selectedImage" class="image-info">
+            <div class="image-info">
               <span class="author-label">{{ $t("By") }}</span>
               <span class="author-name">{{
                 modalStore.selectedImage?.author
@@ -60,30 +61,45 @@
               </button>
             </div>
           </div>
+          <div v-else class="image-container">
+            <AppLoadingSpinner />
+          </div>
         </div>
       </div>
     </Transition>
   </Teleport>
 </template>
 <script setup lang="ts">
-import { useModalStore } from "~/stores/modalStore";
 import DownloadIcon from "~/assets/icons/download.svg";
+import { useModalStore } from "~/stores/modalStore";
 
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref, watch, computed } from "vue";
 
 const closeBtnRef = ref<HTMLButtonElement | null>(null);
 const modalStore = useModalStore();
 const modalContentRef = ref<HTMLElement | null>(null);
 const modalTitleId = ref();
+const currentSelectedImage = computed(() => modalStore.selectedImage);
+const imageStyle = ref({});
 
 watch(
-  () => modalStore.isOpen,
-  (isOpen) => {
-    if (!isOpen) return;
+  () => modalStore.selectedImage,
+  (selectedImage) => {
     closeBtnRef.value?.focus();
-    modalTitleId.value = `modal-image-${modalStore.selectedImage?.id}`;
+    modalTitleId.value = `modal-image-${selectedImage?.id}`;
   }
 );
+
+const viewPortWidth = ref(window.innerWidth);
+const viewPortHeight = ref(window.innerHeight);
+
+onMounted(() => window.addEventListener("resize", onResize, { passive: true }));
+onUnmounted(() => window.removeEventListener("resize", onResize));
+
+function onResize() {
+  viewPortWidth.value = window.innerWidth;
+  viewPortHeight.value = window.innerHeight;
+}
 
 const imageModalStyle = computed(() => {
   if (!modalStore.imageRect) return {};
@@ -91,11 +107,53 @@ const imageModalStyle = computed(() => {
   const rect = modalStore.imageRect;
 
   return {
-    "--image-x": `${rect.x / 16}rem`,
-    "--image-y": `${rect.y / 16}rem`,
-    "aspect-ratio": `${rect.width} / ${rect.height}`,
+    "--image-x": `${rect.x}px`,
+    "--image-y": `${rect.y}px`,
   };
 });
+
+watch(
+  () => modalStore.isOpened,
+  (isOpened) => {
+    if (!import.meta.client) return ;
+
+    // simple way to avoid scrolling when modal is opened
+    document.body.style.overflow = isOpened ? "hidden" : "";
+  }
+);
+
+watch(
+  [viewPortWidth, viewPortHeight, currentSelectedImage],
+  ([viewPortWidth, viewPortHeight, selectedImage]) => {
+    if (!selectedImage) return;
+
+    const { width: imgW, height: imgH } = selectedImage;
+    const aspectRatio = imgW / imgH;
+
+    const maxWidth = viewPortWidth * 0.9; // 90vw
+    const maxHeight = viewPortHeight * 0.9; // 90vh
+
+    let newWidth = imgW;
+    let newHeight = imgH;
+
+    if (newWidth > maxWidth) {
+      newWidth = maxWidth;
+      newHeight = newWidth / aspectRatio;
+    }
+
+    if (newHeight > maxHeight) {
+      newHeight = maxHeight;
+      newWidth = newHeight * aspectRatio;
+    }
+
+    imageStyle.value = {
+      width: `${newWidth}px`,
+      height: `${newHeight}px`,
+      "aspect-ratio": `${aspectRatio}`,
+    };
+  },
+  { immediate: true }
+);
 
 const handleDownload = () => {
   if (!modalStore.selectedImage) return;
@@ -114,6 +172,7 @@ const handleDownload = () => {
 
 <style scoped>
 .modal-overlay {
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -124,14 +183,19 @@ const handleDownload = () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  overscroll-behavior: contain;
   z-index: 1002;
+}
+:global(#app.modal-overlay) {
+  overflow: hidden;
+  height: 100vh;
 }
 
 .modal-content {
   display: flex;
   flex-direction: column;
-  max-width: min(90vw, 56rem);
-  max-height: min(90vh, 42rem);
+  max-width: 90vw;
+  max-height: 90vh;
   background: var(--mr-color-bg-elevated);
   border-radius: 0.75rem;
   box-shadow: var(--mr-shadow-lg);
@@ -143,8 +207,8 @@ const handleDownload = () => {
 .image-container {
   display: flex;
   align-items: center;
-  max-height: 80vh;
-  max-width: 100vw;
+  max-height: inherit;
+  max-width: inherit;
   justify-content: center;
   overflow-x: hidden;
   position: relative;
@@ -294,7 +358,6 @@ const handleDownload = () => {
     right: 0;
     bottom: 0;
     transform: none;
-    width: 100%;
     min-width: auto;
     max-width: none;
     padding: 1.25rem 1.5rem;
@@ -322,7 +385,7 @@ const handleDownload = () => {
   .image-info {
     gap: 1rem;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 }
 

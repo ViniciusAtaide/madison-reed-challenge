@@ -1,36 +1,55 @@
 <template>
   <div class="gallery-container">
-    <div class="gallery-grid">
-      <IndexGalleryItem
-        v-for="image in data"
-        :key="image.id"
-        :image="image"
-      />
-    </div>
-
+    <template v-if="!pending">
+      <div class="gallery-grid">
+        <IndexGalleryItem
+          v-for="image in modalStore.images"
+          :key="image.id"
+          :image="image"
+        />
+      </div>
+    </template>
+    <template v-else>
+      <AppLoadingSpinner />
+    </template>
     <AppImageModal />
   </div>
 </template>
 
 <script setup lang="ts">
+import { useModalStore } from "~/stores/modalStore";
 import { ImageDataArraySchema } from "~/validators/image";
 
-const { data } = await useLazyFetch("https://picsum.photos/v2/list?limit=100", {
-  key: "gallery-images",
-  cache: "force-cache",
-  default: () => [],
-  transform: async (rawData) => {
-    try {
-      return ImageDataArraySchema.parseAsync(rawData);
-    } catch (validationError) {
-      throw createError({
-        statusCode: 422,
-        statusMessage: "Invalid image data received from API",
-        data: validationError,
-      });
-    }
-  },
-});
+const modalStore = useModalStore();
+
+const { data, pending } = await useLazyFetch(
+  import.meta.env.VITE_PICSUM_API_URL,
+  {
+    key: "gallery-images",
+    cache: "force-cache",
+    default: () => [],
+    getCachedData: () =>
+      modalStore.images.length > 0 ? modalStore.images : undefined,
+    transform: async (rawData) => {
+      try {
+        return ImageDataArraySchema.parseAsync(rawData);
+      } catch (validationError) {
+        throw createError({
+          statusCode: 422,
+          statusMessage: "Invalid image data received from API",
+          data: validationError,
+        });
+      }
+    },
+  }
+);
+
+watch(
+  () => data.value,
+  (images) => {
+    modalStore.loadImages(images);
+  }
+);
 </script>
 
 <style scoped>

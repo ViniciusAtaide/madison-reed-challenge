@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-const { locale, locales, setLocale } = useI18n();
+const { locale, setLocale } = useI18n();
 const localePath = useLocalePath();
 const router = useRouter();
 
@@ -21,12 +21,15 @@ const flagMap = {
   "pt-br": "🇧🇷",
 };
 
-const switchToNextLanguage = async () => {
-  const nextFlag  = Object.keys(flagMap).find((key) => key !== locale.value) as 'en' | 'pt-br';
+const nextFlag = (locale: string) =>
+  Object.keys(flagMap).find((key) => key !== locale) as "en" | "pt-br";
 
-  await setLocale(nextFlag ?? "en");
-  await router.push(localePath({ name: "index" }, nextFlag));
-};
+const switchToNextLanguage = async () =>
+  setLocale(nextFlag(locale.value) ?? "en");
+
+watch(locale, (newLocale) => {
+  router.push(localePath({ name: "index" }, nextFlag(newLocale)));
+});
 </script>
 
 <style scoped>

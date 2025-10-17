@@ -26,7 +26,7 @@
             <button
               class="action-button expand-button"
               :aria-label="$t('Expand')"
-              @click="handleExpandClick(image)"
+              @click="handleExpandClick(image.id)"
             >
               <ExpandIcon class="icon" />
             </button>
@@ -44,19 +44,17 @@
 
 <script setup lang="ts">
 import ExpandIcon from "~/assets/icons/expand.svg";
-import type { ImageSchema } from "~/validators/image";
 import { useModalStore } from "~/stores/modalStore";
 
-interface Props {
-  image: ImageSchema;
-}
+import type { ImageSchema } from '~/validators/image';
 
-const props = defineProps<Props>();
+const { image } = defineProps<{ image: ImageSchema }>();
 
 const modalStore = useModalStore();
 const imageRef = ref<HTMLImageElement | null>(null);
 const isInViewport = ref(false);
 const shouldLoadImage = ref(false);
+const router = useRouter();
 
 onMounted(() => {
   if (!imageRef.value) return;
@@ -84,10 +82,11 @@ onMounted(() => {
   });
 });
 
-const handleExpandClick = (image: ImageSchema) => {
+const handleExpandClick = (imageId: string) => {
   if (!imageRef.value) return;
 
-  modalStore.openModal(image, imageRef.value.getBoundingClientRect());
+  modalStore.openModal(imageId, imageRef.value.getBoundingClientRect());
+  router.push({ query: { image: imageId } });
 };
 </script>
 
