@@ -12,10 +12,10 @@ export const useModalStore = defineStore("modal", () => {
   const router = useRouter();
 
   watch([route, images], ([newRoute]) => {
-    if (!newRoute.query.image || Array.isArray(newRoute.query.image))
+    if (!newRoute.query.imageId || Array.isArray(newRoute.query.imageId))
       return closeModal();
 
-    openModal(newRoute.query.image);
+    openModal(newRoute.query.imageId);
   }, { immediate: true });
 
   function loadImages(imageData: ImageSchema[]) {
@@ -31,17 +31,10 @@ export const useModalStore = defineStore("modal", () => {
   }
 
   function closeModal() {
-    // remove the `image` param from the current query without mutating the store state
-    const newQuery = { ...route.query };
-    if (newQuery.image) delete newQuery.image;
-    router.push({ query: newQuery });
-
     isOpened.value = false;
-
-    setTimeout(() => {
-      imageRect.value = null;
-      selectedImage.value = null;
-    }, 300);
+    router.push({ query: {} });
+    imageRect.value = null;
+    selectedImage.value = null;
   }
 
   return {

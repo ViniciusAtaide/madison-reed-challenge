@@ -1,8 +1,8 @@
 <template>
   <figure class="gallery-item">
     <div
-      class="image-container"
       ref="imageRef"
+      class="image-container"
       :style="{ aspectRatio: `${image.width} / ${image.height}` }"
     >
       <NuxtImg
@@ -86,7 +86,7 @@ const handleExpandClick = (imageId: string) => {
   if (!imageRef.value) return;
 
   modalStore.openModal(imageId, imageRef.value.getBoundingClientRect());
-  router.push({ query: { image: imageId } });
+  router.push({ query: { imageId } });
 };
 </script>
 

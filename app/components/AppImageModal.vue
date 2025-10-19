@@ -95,10 +95,14 @@ const viewPortHeight = ref(window.innerHeight);
 
 onMounted(() => window.addEventListener("resize", onResize, { passive: true }));
 onUnmounted(() => window.removeEventListener("resize", onResize));
+const timeoutId = ref<number | null>(null);
 
 function onResize() {
-  viewPortWidth.value = window.innerWidth;
-  viewPortHeight.value = window.innerHeight;
+  if (timeoutId.value) window.clearTimeout(timeoutId.value);
+  timeoutId.value = setTimeout(() => {
+    viewPortWidth.value = window.innerWidth;
+    viewPortHeight.value = window.innerHeight;
+  }, 300);
 }
 
 const imageModalStyle = computed(() => {
@@ -115,7 +119,7 @@ const imageModalStyle = computed(() => {
 watch(
   () => modalStore.isOpened,
   (isOpened) => {
-    if (!import.meta.client) return ;
+    if (!import.meta.client) return;
 
     // simple way to avoid scrolling when modal is opened
     document.body.style.overflow = isOpened ? "hidden" : "";
@@ -225,7 +229,7 @@ const handleDownload = () => {
   position: absolute;
   bottom: 5vh;
   padding: 1rem 1.5rem;
-  background: color-mix(in srgb, var(--mr-color-bg-elevated) 30%, transparent);
+  background: color-mix(in srgb, var(--mr-color-bg-elevated) 50%, transparent);
   border: 0.0625rem solid var(--mr-color-border-primary);
   border-radius: 0.5rem;
   backdrop-filter: blur(0.5em);
@@ -337,12 +341,12 @@ const handleDownload = () => {
 
 .modal-enter-from .modal-content {
   transform: translateX(calc(var(--image-x, 50vw) - 50vw))
-    translateY(calc(var(--image-y, 50vh) - 50vh)) scale(0.2);
+    translateY(calc(var(--image-y, 50vh) - 50vh)) scale(0.1);
 }
 
 .modal-leave-to .modal-content {
   transform: translateX(calc(var(--image-x, 50vw) - 50vw))
-    translateY(calc(var(--image-y, 50vh) - 50vh)) scale(0.2);
+    translateY(calc(var(--image-y, 50vh) - 50vh)) scale(0.1);
 }
 
 @media (max-width: 768px) {
