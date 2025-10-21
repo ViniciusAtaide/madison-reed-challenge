@@ -25,10 +25,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "24"
-          
+
       - name: Enable Corepack
         run: corepack enable
-        
+
       - name: Install dependencies
         run: pnpm install
 
@@ -37,6 +37,8 @@ jobs:
 
       - name: Build with Nuxt
         run: pnpm run build
+        env:
+          VITE_PICSUM_API_URL: ${{ vars.VITE_PICSUM_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -46,8 +48,8 @@ jobs:
   deploy:
     needs: build
     permissions:
-      pages: write 
-      id-token: write 
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
