@@ -52,7 +52,6 @@ const { image } = defineProps<{ image: ImageSchema }>();
 
 const modalStore = useModalStore();
 const imageRef = ref<HTMLImageElement | null>(null);
-const isInViewport = ref(false);
 const shouldLoadImage = ref(false);
 const router = useRouter();
 
@@ -62,7 +61,6 @@ onMounted(() => {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        isInViewport.value = entry.isIntersecting;
         if (entry.isIntersecting) {
           shouldLoadImage.value = true;
         }
