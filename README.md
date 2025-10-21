@@ -14,6 +14,8 @@ Install mise for automatic language agnostic global dependencies installation
 curl https://mise.run | sh
 ```
 
+Before running the project rename .env.example to .env. This will enable all environment variables to be loaded.
+
 Automatic first setup
 
 ```bash
