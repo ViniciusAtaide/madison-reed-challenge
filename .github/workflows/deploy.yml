@@ -38,7 +38,7 @@ jobs:
       - name: Build with Nuxt
         run: pnpm run build
         env:
-          VITE_PICSUM_API_URL: ${{ secrets.VITE_PICSUM_API_URL }}
+          VITE_PICSUM_API_URL: ${{ vars.VITE_PICSUM_API_URL }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
